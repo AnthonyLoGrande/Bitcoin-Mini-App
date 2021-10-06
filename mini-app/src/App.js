@@ -24,11 +24,9 @@ class App extends Component{
   }
       
 
-
-  selectCurrency(code){
-    this.setState({selectedCurrency:code}) 
+  handleChange(e){
+    this.setState({selectedCurrency:e.target.value});
   }
-
   
   render() { 
     const {selectCurrency} = this
@@ -36,9 +34,9 @@ class App extends Component{
 
     return ( 
       <div className = 'App'> 
-        <h1 className = 'title' >  Bitcoin Application </h1>
-        <h2>current price: {Object.keys(this.state.bpi).length ? `${this.state.bpi[this.state.selectedCurrency]?.rate} ${this.state.selectedCurrency}`: ""}</h2> 
-        <h2> Select Your Currency </h2>
+        <h1 className = 'App-header' >  Bitcoin Application </h1>
+        <h2 className="title">current price: {Object.keys(this.state.bpi).length ? `${this.state.bpi[this.state.selectedCurrency]?.rate} ${this.state.selectedCurrency}`: ""}</h2> 
+        <h2 className="title"> Select Your Currency </h2>
         <CurrencySelector  bpi={this.state.bpi} currencySelectorFunc={selectCurrency}/>
         </div>
     )
