@@ -9,51 +9,39 @@ class App extends Component{
   constructor(){
     super();
     this.state = {
-      time: [] ,
-      bpi: [],
-      selectedCurrency: null,
-      disclaimer:[], 
+      time: {} ,
+      bpi: {},
+      selectedCurrency: "USD",
     }
   }
 
-  handleClick() {
-    this.setState({clicked: !this.state.clicked});
+ 
+  async componentDidMount(){ 
+          let res = await fetch(url);
+          let json = await res.json();
+          this.setState({time: json.time, bpi: json.bpi})
+          console.log(this.state.bpi)
   }
+      
+
 
   selectCurrency(code){
-    this.setState({selectedCurrency:code) 
+    this.setState({selectedCurrency:code}) 
   }
 
-
-  
-  async componentDidMount(){ 
-
-    let res = await fetch(url);
-    let json = await res.json();
-    let time = json.time;
-    let bpi =json.bpi;
-    let chartName =json.chartName;
-    let disclaimer =json.disclaimer;
-    this.setState({isLoaded: true, time: time, bpi: bpi, chartName: chartName, disclaimer: disclaimer})
-    console.log(this.state.bpi)
-  }
   
   render() { 
-    const { handleClick} = this
-    const {time, bpi, disclaimer } = this.state
+    const {selectCurrency} = this
   
 
     return ( 
       <div className = 'App'> 
-        <h1 className = 'title' >  Bitcoin Application </h1> 
+        <h1 className = 'title' >  Bitcoin Application </h1>
+        <h2>current price: {Object.keys(this.state.bpi).length ? `${this.state.bpi[this.state.selectedCurrency]?.rate} ${this.state.selectedCurrency}`: ""}</h2> 
         <h2> Select Your Currency </h2>
-        <CurrencySelector  bpi={bpi} currencySelectorFunc={selectCurrency}/>
-        {console.log(value)}
+        <CurrencySelector  bpi={this.state.bpi} currencySelectorFunc={selectCurrency}/>
         </div>
     )
   }
 }
-
-
-
 export default App;
