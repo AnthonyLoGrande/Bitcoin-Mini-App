@@ -13,6 +13,7 @@ class App extends Component{
       bpi: {},
       selectedCurrency: "USD",
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
  
@@ -24,8 +25,9 @@ class App extends Component{
   }
       
 
-  handleChange(e){
-    this.setState({selectedCurrency:e.target.value});
+  handleChange(value){
+    this.setState({selectedCurrency: value});
+    console.log(this.state.selectedCurrency)
   }
   
   render() { 
@@ -37,7 +39,7 @@ class App extends Component{
         <h1 className = 'App-header' >  Bitcoin Application </h1>
         <h2 className="title">current price: {Object.keys(this.state.bpi).length ? `${this.state.bpi[this.state.selectedCurrency]?.rate} ${this.state.selectedCurrency}`: ""}</h2> 
         <h2 className="title"> Select Your Currency </h2>
-        <CurrencySelector  bpi={this.state.bpi} currencySelectorFunc={selectCurrency}/>
+        <CurrencySelector changeFunc={this.handleChange}/>
         </div>
     )
   }

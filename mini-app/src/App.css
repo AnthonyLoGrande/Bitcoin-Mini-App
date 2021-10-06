@@ -3,6 +3,7 @@
   background-color: beige;
   background-image: url('coinBG2.png');
   height: 100vh;
+  
 }
 .title{
   background-color: gold;
@@ -30,6 +31,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
